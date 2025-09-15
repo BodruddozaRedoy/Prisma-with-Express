@@ -2,14 +2,32 @@
   "name": "prisma-with-express-blog-web",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "@prisma/client": "^6.16.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
     "express": "^5.1.0"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^24.4.0",
+    "prisma": "^6.16.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BodruddozaRedoy/Prisma-with-Express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BodruddozaRedoy/Prisma-with-Express/issues"
+  },
+  "homepage": "https://github.com/BodruddozaRedoy/Prisma-with-Express#readme",
+  "description": ""
 }
