@@ -1,25 +1,32 @@
-import { createServer, Server } from 'node:http';
+import http, { Server } from "http";
+import dotenv from "dotenv";
+import { prisma } from "./config/db.js";
+import app from "./app.js";
+
+dotenv.config();
 
 let server: Server | null = null;
 
-async function startServer() {
+async function connectToDB() {
   try {
-    server = createServer((req, res) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('OK');
-    });
-
-    const port = Number(process.env.PORT ?? 5000);
-    server.listen(port, () => {
-      console.log(`HTTP server listening on port ${port}`);
-    });
+    await prisma.$connect();
+    console.log("Db Connection successful!!!");
   } catch (error) {
-    console.error('Failed to start server:', error);
-    throw error;
+    console.log("DB Connection failed");
+    process.exit(1);
   }
 }
 
-// Only start the server if this file is executed directly
-// (useful if you later export startServer for tests)
+async function startServer() {
+  try {
+    await connectToDB();
+    server = http.createServer(app);
+    server.listen(process.env.PORT, () => {
+      console.log(`Server is running on port:`, process.env.PORT);
+    });
+  } catch (error) {
+    console.log("Server Error");
+    process.exit(1);
+  }
+}
 startServer();
