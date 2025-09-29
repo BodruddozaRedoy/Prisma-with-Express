@@ -4,6 +4,7 @@ import express from "express";
 import { userRouter } from "./modules/user/user.routes";
 import { authRouter } from "./modules/auth/auth.routes";
 import { postRouter } from "./modules/Post/post.routes";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -37,4 +38,4 @@ app.use((req, res, next) => {
   });
 });
 
-export default app;
+export default serverless(app);
